@@ -343,7 +343,7 @@ Use ECM online:
 
 ## 6.A Shortcut
 
-For those who meet problems,I have uploaded my version of the factor folder to Github as zip. You can download directly from https://github.com/MDNTCT/Factoring/releases/download/untagged-3643faa0b024a72cc0ce/factor.zip .
+For those who meet problems,I have uploaded my version of the factor folder to Github as zip. You can download directly from https://github.com/MDNTCT/Factoring/blob/main/factor.zip .
 
 The only changes required are the following:
 
