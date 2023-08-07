@@ -304,10 +304,6 @@ Other usage on CADO-NFS can be found in the README file.
 .\yafu-x64.exe "nfs(2^401-1)"
 ```
 
-```
-.\yafu-x64.exe "ecm(44631589825541155210729717604799021190914952109987,200)" -B1ecm=1e6
-```
-
 ### GGNFS:
 
 ```
