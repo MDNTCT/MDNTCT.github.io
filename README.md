@@ -6,7 +6,7 @@ This is a guide for Windows users who are interested in factoring.
 
 I will introduce some softwares for factoring and also how to use them.
 
-## 1.Downloads
+## 1. Downloads
 
 You need to download all the software you need to get started.
 
@@ -24,7 +24,7 @@ If you want to use CADO-NFS , you should also download WSL2 , which provides a L
 
 Now the downloaded folders are : ggnfs , msieve , yafu-1.34 , gmp-ecm.
 
-## 2.Preparations&Usage
+## 2. Preparations & Usage
 
 I assume you have downloaded all the software mentioned above.
 
@@ -46,7 +46,7 @@ yafu-1.34
 gmp-ecm
 ```
 
-### Ⅰ.GGNFS Preparations
+### GGNFS Preparations
 
 Copy all the files in the msieve directory and paste them into the GGNFS folder.
 
@@ -143,12 +143,12 @@ There must be an empty line at the end of it.
 Then cd to the GGNFS directory and type
 
 ```
-python factmsieve,py number.n
+python factmsieve.py number.n
 ```
 
 And you can enjoy factorization.
 
-### Ⅱ.YAFU preparations
+### YAFU preparations
 
 Open the yafu.ini file in the yafu-1.34 folder.
 
@@ -199,7 +199,7 @@ Then yafu will factor the number itself.
 
 The preparations and usage information ends here.
 
-## 3.Optional Software
+## 3. Optional Software
 
 If you want to use CADO-NFS,which is much faster than GGNFS on Windows,you need to use WSL. It's maybe the fastest and easiest way to use an Linux app on Windows. 
 
@@ -288,7 +288,7 @@ Info:root: Cleaning up computation data in /tmp/cado.1lafrwdi
 
 Other usage on CADO-NFS can be found in the README file.
 
-## 4.Usage examples
+## 4. Usage examples
 
 ### YAFU:
 
@@ -323,7 +323,7 @@ n:446315898255411552107297176047990211909149521099871234567817662781
 ./cado-nfs.py 446315898255411559825541155210729717601136643651124567789981
 ```
 
-## 5.Factoring Websites
+## 5. Factoring Websites
 
 The biggest factoring website:
 
@@ -337,7 +337,7 @@ Use ECM online:
 
 [Integer factorization calculator](https://www.alpertron.com.ar/ECM.HTM)
 
-## 6.A Shortcut
+## 6. A Shortcut
 
 For those who meet problems,I have uploaded my version of the factor folder to Github as zip. You can download directly from https://github.com/MDNTCT/Factoring/blob/main/factor.zip .
 
@@ -350,7 +350,27 @@ factmsieve.py------cores and number of CPU
 
 The package does not contain CADO-NFS,so you need to install it yourself.
 
-## 7.Other
+## 7. Things to know
+
+Someone made a list of time needed for factoring:
+
+```
+<100 digits --> can be factored by a desktop computer in a hour or less (as long as you use the right tools)
+100-110 digits --> a couple of hours using a desktop with quad-core processor or greater
+110-120 digits --> less than a day using a desktop with quad-core processor or greater
+130 digits --> several days
+140 digits --> 10+ days
+150 digits --> month+
+160 digits --> half a year
+>170 digits --> You're mad, or you're working for the NSA!
+```
+
+How to factor a ordinary number:
+
+1. Try with YAFU to find small factors first (<50 digits).
+2. If YAFU finishes factoring,it's done. If YAFU sticks on a certain step for a long time (for example if a 100 digits composite factor is left not factored and has no small factor to be found with ECM) ,you should abort YAFU and try with another software to factor it. For example GGNFS or CADO-NFS.
+
+## 8. Other Information
 
 All information on usage can be found in the README files in YAFU,CADO-NFS and GGNFS folders.
 
