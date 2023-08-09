@@ -8,13 +8,13 @@ I will introduce some softwares for factoring and also how to use them.
 
 ## 1. Downloads
 
-You need to download all the software you need to get started.
+You need to download all the software required to get started.
 
 This is the recommended site:https://download.mersenne.ca/
 
 **Necessary programs : msieve , GGNFS , GMP-ECM , YAFU**
 
-You need to go into the msieve , GGNFS , GMP-ECM , YAFU (version 1.34 is the most stable one) folder in this website and download the latest binaries. (Also unzip them)
+You need to go inside the msieve , GGNFS , GMP-ECM , YAFU (version 1.34 is the most stable one) folder in this website and download the latest binaries. (Also unzip them)
 
 Besides , you also need to download and install Python 3 (the recommended version).
 
@@ -365,7 +365,7 @@ Someone made a list of time needed for factoring:
 >170 digits --> You're mad, or you're working for the NSA!
 ```
 
-How to factor a ordinary number:
+How to factor an ordinary number:
 
 1. Try with YAFU to find small factors first (<50 digits).
 2. If YAFU finishes factoring,it's done. If YAFU sticks on a certain step for a long time (for example if a 100 digits composite factor is left not factored and has no small factor to be found with ECM) ,you should abort YAFU and try with another software to factor it. For example GGNFS or CADO-NFS.
