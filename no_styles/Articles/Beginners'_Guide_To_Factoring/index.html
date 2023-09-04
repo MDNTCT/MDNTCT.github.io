@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Beginners&#39; Guide To Factoring</title>
+</head>
+<body><p>&nbsp;</p>
+<h1 id='beginners-guide-to-factoring'>Beginners&#39; Guide To Factoring</h1>
+<p>This is a guide for Windows users who are interested in factoring.</p>
+<p>I will introduce some softwares for factoring and also how to use them.</p>
+<h2 id='1-downloads'>1. Downloads</h2>
+<p>You need to download all the software required to get started.</p>
+<p>This is the recommended site: <a href='https://download.mersenne.ca/' target='_blank' class='url'>https://download.mersenne.ca/</a></p>
+<p><strong>Necessary programs : msieve , GGNFS , GMP-ECM , YAFU</strong></p>
+<p>You need to go inside the msieve , GGNFS , GMP-ECM , YAFU (version 1.34 is the most stable one) folder in this website and download the latest binaries. (Also unzip them)</p>
+<p>Besides , you also need to download and install Python 3 (the recommended version).</p>
+<p><strong>Optional : CADO-NFS</strong></p>
+<p>If you want to use CADO-NFS , you should also download WSL2 , which provides a Linux-like environment . (Systems requirements can be found on Microsoft website)</p>
+<p>Now the downloaded folders are : ggnfs , msieve , yafu-1.34 , gmp-ecm.</p>
+<h2 id='2-preparations--usage'>2. Preparations &amp; Usage</h2>
+<p>I assume you have downloaded all the software mentioned above.</p>
+<p>Create a folder called &quot; factor &quot; . (To me it&#39;s E:\factor.)</p>
+<p>Extract all the downloaded files into the factor folder.</p>
+<p>Rename the ggnfs folder &quot;ggnfs-bin&quot;</p>
+<p>Copy the folder ggnfs-bin folder and rename it as &quot; GGNFS &quot; . They should have the same files inside.</p>
+<p>The factor folder should look like this: (Change your folder names exactly the same if they are different from the followings)</p>
+<pre><code>GGNFS
+ggnfs-bin
+msieve
+yafu-1.34
+gmp-ecm
+</code></pre>
+<h3 id='ggnfs-preparations'>GGNFS Preparations</h3>
+<p>Copy all the files in the msieve directory and paste them into the GGNFS folder.</p>
+<p>The GGNFS folder should contain these files:</p>
+<pre><code>def-nm-params.txt
+def-par.txt
+factLat.pl
+factMsieve.pl
+factmsieve.py
+ggnfs-doc.pdf
+gnfs-lasieve4I11e.exe
+gnfs-lasieve4I12e.exe
+gnfs-lasieve4I13e.exe
+gnfs-lasieve4I14e.exe
+gnfs-lasieve4I15e.exe
+gnfs-lasieve4I16e.exe
+makefb.exe
+matbuild.exe
+matprune.exe
+matsolve.exe
+msieve.exe
+pol51m0b.exe
+pol51m0n.exe
+pol51opt.exe
+polyselect.exe
+procrels.exe
+sieve.exe
+sqrt.exe
+</code></pre>
+<p><em>If you cannot find &quot; factmsieve.py &quot; in the downloaded GGNFS folder , you can download it here :<a href='http://gladman.me.uk/computing/factmsieve.py' target='_blank' class='url'>http://gladman.me.uk/computing/factmsieve.py</a></em></p>
+<p>Open the factmsieve.py and edit it:</p>
+<p>Change lines 63-64 from:</p>
+<pre><code># Set binary directory paths
+GGNFS_PATH = &#39;C:/Users/brg\Documents/Visual Studio 2015/Projects/ggnfs/bin/x64/Release&#39;
+MSIEVE_PATH = &#39;C:/Users/brg/Documents/Visual Studio 2015/Projects/msieve/bin/x64/Release&#39;
+</code></pre>
+<p>to:</p>
+<pre><code># Set binary directory paths
+GGNFS_PATH = &#39;.&#39;
+MSIEVE_PATH = &#39;.&#39;
+</code></pre>
+<p>Change line 67 from:</p>
+<pre><code>NUM_CPUS = 4
+</code></pre>
+<p>to whatever the # of CPUs you want to use for the factoring. </p>
+<p>Comment out the following lines:</p>
+<pre><code>&gt;&gt;&gt;&gt;&gt; code commented out - Part I
+# # Figure the time scale for this machine.
+# output(&#39;-&gt; Computing time scale for this machine...&#39;)
+# (ret, res) = run_exe(PROCRELS, &#39;-speedtest&#39;, out_file = subprocess.PIPE)
+# if res:
+# tmp = grep_l(&#39;timeunit:&#39;, res)
+# timescale = float(re.sub(&#39;timeunit:\s*&#39;, &#39;&#39;, tmp[0]))
+# else:
+# timescale = 0.0
+
+&gt;&gt;&gt;&gt;&gt; code commented out - Part II
+#print(&#39;Scaled time: {0:1.2f} units (timescale= {1:1.3f}).&#39;
+# .format(total_time * timescale, timescale))
+</code></pre>
+<p>Save the changes.</p>
+<p>Now you have finished with GGNFS preparations.</p>
+<h4 id='ggnfs-usage'>GGNFS usage</h4>
+<p>To use GGNFS to factor numbers,simply create a file in the GGNFS folder called &quot;number.n&quot;(or whatever name you like) with the format</p>
+<pre><code>n:&lt;a number&gt;
+
+</code></pre>
+<p>There must be an empty line at the end of it.</p>
+<p>Then cd to the GGNFS directory and type</p>
+<pre><code>python factmsieve.py number.n
+</code></pre>
+<p>And you can enjoy factorization.</p>
+<h3 id='yafu-preparations'>YAFU preparations</h3>
+<p>Open the yafu.ini file in the yafu-1.34 folder.</p>
+<p>Change it to look like this and save the changes:</p>
+<pre><code>B1pm1=100000
+B1pp1=20000
+B1ecm=11000
+rhomax=1000
+threads=&lt;the number of threads you want yafu to use&gt;
+pretest_ratio=0.25
+ggnfs_dir=..\ggnfs-bin\
+%ggnfs_dir=/ggnfs-bin/
+ecm_path=..\gmp-ecm\ecm.exe
+%ecm_path=../ecm/current/ecm
+</code></pre>
+<p>Finished.</p>
+<h4 id='yafu-usage'>YAFU usage</h4>
+<p>cd to your yafu-1.34 folder and type:</p>
+<pre><code>.\yafu-x64.exe &quot;factor(a number)&quot;
+</code></pre>
+<p>If you want to use GGNFS with YAFU(which has been filled in the ini file),type</p>
+<pre><code>.\yafu-x64.exe &quot;nfs(a number)&quot;
+</code></pre>
+<p>The number can be an expression,like</p>
+<pre><code>(10^97-1)/9
+</code></pre>
+<p>or</p>
+<pre><code>2^499-1
+</code></pre>
+<p>Then yafu will factor the number itself.</p>
+<p>The preparations and usage information ends here.</p>
+<h2 id='3-optional-software'>3. Optional Software</h2>
+<p>If you want to use CADO-NFS,which is much faster than GGNFS on Windows,you need to use WSL. It&#39;s maybe the fastest and easiest way to use an Linux app on Windows. </p>
+<p>You need to install GMP first.</p>
+<p>Open WSL and enter</p>
+<pre><code>sudo apt-get update
+</code></pre>
+<p>Enter your password,then enter</p>
+<pre><code>sudo apt-get install g++ m4 zlib1g-dev make p7zip
+</code></pre>
+<p>Download GMP from <a href='https://gmplib.org/download/gmp/gmp-6.2.1.tar.xz' target='_blank' class='url'>https://gmplib.org/download/gmp/gmp-6.2.1.tar.xz</a></p>
+<p>Rename the gmp-6.x.x folder to gmp.</p>
+<p>Extract to the factor folder.</p>
+<p>Move into the GMP folder in WSL.</p>
+<pre><code>cd /mnt/.../factor/gmp
+</code></pre>
+<p>type</p>
+<pre><code>./configure
+</code></pre>
+<pre><code>make
+</code></pre>
+<pre><code>make check
+</code></pre>
+<p>If all checked out, type:</p>
+<pre><code>sudo make install
+</code></pre>
+<p>Now you have installled GMP.</p>
+<p>&nbsp;</p>
+<p>Stay in the factor folder,enter</p>
+<pre><code>git clone https://gitlab.inria.fr/cado-nfs/cado-nfs.git
+cd cado-nfs
+make
+</code></pre>
+<p>After it finishes,enter</p>
+<pre><code>./cado-nfs.py 90377629292003121684002147101760858109247336549001090677693
+</code></pre>
+<p>to check if it works alright. Wait a few seconds,and something like this should appear</p>
+<pre><code>Info:root: Using default parameter file ./parameters/factor/params.c60
+Info:root: No database exists yet
+Info:root: Created temporary directory /tmp/cado.1lafrwdi
+Info:Database: Opened connection to database /tmp/cado.1lafrwdi/c60.db
+Info:root: Set tasks.threads=8 based on detected logical cpus
+Info:root: tasks.polyselect.threads = 2
+Info:root: tasks.sieve.las.threads = 2
+...
+Info:Quadratic Characters: Total cpu/real time for characters: 0.16/0.0801561
+Info:Square Root: Total cpu/real time for sqrt: 2.07/0.413262
+Info:HTTP server: Shutting down HTTP server
+Info:Complete Factorization: Total cpu/elapsed time for entire factorization: 47.08/38.8295
+Info:root: Cleaning up computation data in /tmp/cado.1lafrwdi
+760926063870977 773951836515617 260938498861057 588120598053661
+</code></pre>
+<p>Other usage on CADO-NFS can be found in the README file.</p>
+<h2 id='4-usage-examples'>4. Usage examples</h2>
+<h3 id='yafu'>YAFU:</h3>
+<pre><code>.\yafu-x64.exe &quot;factor(44631589825541155210729717604799021190914952109987)&quot;
+</code></pre>
+<pre><code>.\yafu-x64.exe &quot;siqs(rsa(200))&quot;
+</code></pre>
+<pre><code>.\yafu-x64.exe &quot;nfs(2^401-1)&quot;
+</code></pre>
+<h3 id='ggnfs'>GGNFS:</h3>
+<pre><code>python factmsieve.py number.n
+</code></pre>
+<p>inside number.n:</p>
+<pre><code>n:446315898255411552107297176047990211909149521099871234567817662781
+
+</code></pre>
+<h3 id='cado-nfs'>CADO-NFS:</h3>
+<pre><code>./cado-nfs.py 446315898255411559825541155210729717601136643651124567789981
+</code></pre>
+<h2 id='5-factoring-websites'>5. Factoring Websites</h2>
+<p>The biggest factoring website:</p>
+<p><a href='http://factordb.com/'>factordb.com</a></p>
+<p>The best factoring forum:</p>
+<p><a href='https://www.mersenneforum.org/index.php'>mersenneforum.org</a></p>
+<p>Use ECM online:</p>
+<p><a href='https://www.alpertron.com.ar/ECM.HTM'>Integer factorization calculator</a></p>
+<h2 id='6-a-shortcut'>6. A Shortcut</h2>
+<p>For those who meet problems,I have uploaded my version of the factor folder to Github as zip. You can download directly from <a href='https://github.com/MDNTCT/Factoring/blob/main/factor.zip' target='_blank' class='url'>https://github.com/MDNTCT/Factoring/blob/main/factor.zip</a> .</p>
+<p>The only changes required are the following:</p>
+<pre><code>yafu.ini------threads
+factmsieve.py------cores and number of CPU
+</code></pre>
+<p>The package does not contain CADO-NFS,so you need to install it yourself.</p>
+<h2 id='7-things-to-know'>7. Things to know</h2>
+<p>Someone made a list of time needed for factoring:</p>
+<pre><code>&lt;100 digits --&gt; can be factored by a desktop computer in a hour or less (as long as you use the right tools)
+100-110 digits --&gt; a couple of hours using a desktop with quad-core processor or greater
+110-120 digits --&gt; less than a day using a desktop with quad-core processor or greater
+130 digits --&gt; several days
+140 digits --&gt; 10+ days
+150 digits --&gt; month+
+160 digits --&gt; half a year
+&gt;170 digits --&gt; You&#39;re mad, or you&#39;re working for the NSA!
+</code></pre>
+<p>How to factor an ordinary number:</p>
+<ol start='' >
+<li>Try with YAFU to find small factors first (&lt;50 digits).</li>
+<li>If YAFU finishes factoring,it&#39;s done. If YAFU sticks on a certain step for a long time (for example if a 100 digits composite factor is left not factored and has no small factor to be found with ECM) ,you should abort YAFU and try with another software to factor it. For example GGNFS or CADO-NFS.</li>
+
+</ol>
+<h2 id='8-other-information'>8. Other Information</h2>
+<p>All information on usage can be found in the README files in YAFU,CADO-NFS and GGNFS folders.</p>
+<p><strong>References:</strong></p>
+<p><a href='https://mersenneforum.org/showthread.php?t=23078&amp;page=3' target='_blank' class='url'>https://mersenneforum.org/showthread.php?t=23078&page=3</a></p>
+<p><a href='http://mersenneforum.org/showthread.php?t=23079' target='_blank' class='url'>http://mersenneforum.org/showthread.php?t=23079</a></p>
+<p><a href='https://mersenneforum.org/showthread.php?t=23089' target='_blank' class='url'>https://mersenneforum.org/showthread.php?t=23089</a></p>
+<p><a href='https://gilchrist.great-site.net/jeff/factoring/nfs_beginners_guide.html' target='_blank' class='url'>https://gilchrist.great-site.net/jeff/factoring/nfs_beginners_guide.html</a></p>
+</body>
+</html>
